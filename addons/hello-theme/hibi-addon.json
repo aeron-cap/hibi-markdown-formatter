@@ -1,0 +1,14 @@
+{
+  "id": "hello-theme",
+  "name": "Hello theme",
+  "description": "A warm light color scheme and a matching dark one.",
+  "version": "1.0.0",
+  "apiVersion": 2,
+  "kind": "theme",
+  "authors": [
+    {
+      "displayName": "Hibi garden"
+    }
+  ],
+  "themes": ["light.json", "dark.json"]
+}
