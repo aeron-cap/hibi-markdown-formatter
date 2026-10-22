@@ -21,6 +21,38 @@ const REQUIRED_COLORS = [
   'accent',
   'border',
 ]
+// Every color name Hibi accepts. Hibi derives the ones a theme leaves out.
+const COLORS = new Set([
+  ...REQUIRED_COLORS,
+  'sidebar',
+  'overlay',
+  'hover',
+  'active',
+  'selection',
+  'selection-ink',
+  'caret',
+  'code-background',
+  'code-ink',
+  'syntax-heading',
+  'syntax-link',
+  'syntax-code',
+  'syntax-meta',
+  'syntax-quote',
+  'syntax-strong',
+  'syntax-emphasis',
+  'syntax-keyword',
+  'syntax-string',
+  'syntax-number',
+  'syntax-comment',
+  'syntax-type',
+  'syntax-function',
+  'syntax-variable',
+  'syntax-operator',
+  'status-success',
+  'status-warning',
+  'status-danger',
+  'status-info',
+])
 const hidden = (name) =>
   name.startsWith('.') ||
   ['node_modules', '__macosx'].includes(name.toLowerCase())
@@ -55,6 +87,11 @@ function checkTheme(file, value) {
   for (const color of REQUIRED_COLORS)
     if (!HEX.test(value.colors?.[color] ?? ''))
       throw new Error(`${file} needs a six-digit hex color for ${color}.`)
+  for (const [color, hex] of Object.entries(value.colors))
+    if (!COLORS.has(color) || !/^#[\da-f]{6}(?:[\da-f]{2})?$/i.test(hex))
+      throw new Error(
+        `${file} has an unknown color name or invalid hex value: ${color}.`,
+      )
 }
 
 /** Returns the checked packages as { folder, manifest }. */

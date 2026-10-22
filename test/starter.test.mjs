@@ -5,7 +5,6 @@ import {
   readFileSync,
   renameSync,
   rmSync,
-  writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
@@ -24,16 +23,13 @@ function scratch(t) {
   return directory
 }
 
-test('the repository contains an installable extension and theme', () => {
+test('the repository contains an installable extension', () => {
   assert.deepEqual(
     checkRepository(root).map(({ folder, manifest }) => [
       folder,
       manifest.kind,
     ]),
-    [
-      ['addons/hello', 'extension'],
-      ['addons/hello-theme', 'theme'],
-    ],
+    [['addons/hello', 'extension']],
   )
 })
 
@@ -79,7 +75,7 @@ test('the extension registers its declared command and stops cleanly', async () 
 })
 
 test('each package also installs on its own from its folder', () => {
-  for (const folder of ['addons/hello', 'addons/hello-theme'])
+  for (const folder of ['addons/hello'])
     assert.deepEqual(
       checkRepository(join(root, folder)).map((item) => item.folder),
       [''],
@@ -99,16 +95,4 @@ test('the check rejects a top-level package next to nested packages', (t) => {
   const directory = scratch(t)
   cpSync(join(directory, 'addons/hello'), directory, { recursive: true })
   assert.throws(() => checkRepository(directory), /Package folders overlap/)
-})
-
-test('the check rejects an invalid theme color', (t) => {
-  const directory = scratch(t)
-  const file = join(directory, 'addons/hello-theme/dark.json')
-  const theme = JSON.parse(readFileSync(file, 'utf8'))
-  theme.colors.accent = 'orange'
-  writeFileSync(file, JSON.stringify(theme))
-  assert.throws(
-    () => checkRepository(directory),
-    /six-digit hex color for accent/,
-  )
 })
