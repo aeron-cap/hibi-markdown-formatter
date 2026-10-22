@@ -63,7 +63,7 @@ You can also attach a ZIP file of your packages to a release and share its downl
 
 To list your addon in Hibi's addon directory, open a pull request in [hibigarden/addons-repository](https://github.com/hibigarden/addons-repository). The directory can link to your repository or release, so you do not need to copy your files there.
 
-When a maintainer accepts your addon, they sign the listed files, so people who install it from Hibi garden do not need to allow unsigned addons. Installing from your own repository URL stays unsigned. See [sideloading and sharing](https://docs.hibi.garden/#page=development%2Faddons%2Fsideloading.md) for signatures, package limits, and updates.
+After a maintainer reviews and merges your listing, Hibi garden signs the listed files automatically, so you do not need a signing key. People who install your addon from Hibi garden do not need to allow unsigned addons. Installing it from your own repository URL stays unsigned and needs **Allow unsigned addons**. See [sideloading and sharing](https://docs.hibi.garden/#page=development%2Faddons%2Fsideloading.md) for signatures, package limits, and updates.
 
 ## License
 
