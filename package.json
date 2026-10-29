@@ -1,6 +1,6 @@
 {
-  "name": "hibi-addon-starter",
-  "version": "1.0.0",
+  "name": "hibi-markdown-formatter",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -8,7 +8,21 @@
     "node": ">=22.18.0"
   },
   "scripts": {
-    "check": "node scripts/check.mjs",
-    "test": "node --test"
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run lint && npm run typecheck && npm run build && node scripts/check.mjs && node scripts/verify-package.mjs",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "test:installed": "node scripts/test-installed.mjs",
+    "bench": "node --experimental-strip-types scripts/benchmark.ts",
+    "lint": "prettier --check src test scripts tsconfig.json package.json .github/workflows/check.yml"
+  },
+  "dependencies": {
+    "prettier": "3.9.10"
+  },
+  "devDependencies": {
+    "@hibi/addon-sdk": "file:vendor/hibi-addon-sdk-0.2.0.tgz",
+    "@types/node": "26.6.6",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
   }
 }

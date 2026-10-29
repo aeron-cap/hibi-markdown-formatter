@@ -1,0 +1,26 @@
+{
+  "id": "markdown-formatter",
+  "name": "Markdown Formatter",
+  "description": "Format standard Markdown and GFM notes from Source view.",
+  "version": "0.1.0",
+  "apiVersion": 3,
+  "kind": "extension",
+  "capabilities": [],
+  "activation": "command",
+  "commands": [
+    {
+      "id": "format",
+      "label": "Format Markdown",
+      "menu": {
+        "location": "app"
+      }
+    }
+  ],
+  "authors": [
+    {
+      "displayName": "aeron-cap",
+      "github": "aeron-cap"
+    }
+  ],
+  "entry": "index.js"
+}
